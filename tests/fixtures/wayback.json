@@ -1,0 +1,11 @@
+{
+  "url": "example.org/old-page",
+  "archived_snapshots": {
+    "closest": {
+      "status": "200",
+      "available": true,
+      "url": "http://web.archive.org/web/20240101000000/https://example.org/old-page",
+      "timestamp": "20240101000000"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "batchcomplete": "",
+  "continue": {"sroffset": 10, "continue": "-||"},
+  "query": {
+    "searchinfo": {"totalhits": 4321},
+    "search": [
+      {
+        "ns": 0,
+        "title": "Solar sail",
+        "pageid": 28551,
+        "snippet": "A <span class=\"searchmatch\">solar</span> <span class=\"searchmatch\">sail</span> is a method of spacecraft propulsion using radiation pressure exerted by sunlight on large surfaces.",
+        "timestamp": "2026-05-11T09:30:00Z"
+      },
+      {
+        "ns": 0,
+        "title": "Radiation pressure",
+        "pageid": 25532,
+        "snippet": "Radiation pressure is the mechanical pressure exerted upon any surface due to the exchange of momentum, the operating principle of the <span class=\"searchmatch\">solar</span> <span class=\"searchmatch\">sail</span>.",
+        "timestamp": "2026-04-02T18:12:44Z"
+      },
+      {
+        "ns": 0,
+        "pageid": 999,
+        "snippet": "An entry without a title that must be skipped."
+      }
+    ]
+  }
+}

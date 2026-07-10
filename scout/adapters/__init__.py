@@ -22,6 +22,13 @@ _ADAPTER_MODULES: tuple[str, ...] = (
     "scout.adapters.duckduckgo",
     "scout.adapters.startpage",
     "scout.adapters.marginalia",
+    "scout.adapters.wikipedia",
+    "scout.adapters.arxiv",
+    "scout.adapters.pubmed",
+    "scout.adapters.wayback",
+    "scout.adapters.rss",
+    "scout.adapters.gdelt",
+    "scout.adapters.guardian",
 )
 
 _registry: dict[str, type[BaseAdapter]] | None = None
