@@ -1,0 +1,28 @@
+{
+  "query": "solar sail",
+  "number_of_results": 2,
+  "results": [
+    {
+      "url": "https://example-space.org/solar-sails",
+      "title": "Solar sails explained",
+      "content": "A solar sail uses radiation pressure from sunlight.",
+      "engine": "mojeek",
+      "publishedDate": "2026-03-01T00:00:00Z",
+      "score": 4.5
+    },
+    {
+      "url": "https://library.example.org/sail-history",
+      "title": "A short history of sailing on light",
+      "content": "From early concepts to flown hardware.",
+      "engine": "brave",
+      "publishedDate": null,
+      "score": 3.1
+    },
+    {
+      "url": "gopher://ancient.example",
+      "title": "Non-http entry skipped",
+      "content": ""
+    }
+  ],
+  "unresponsive_engines": []
+}
