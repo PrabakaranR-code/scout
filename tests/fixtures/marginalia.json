@@ -1,0 +1,24 @@
+{
+  "license": "CC-BY-NC-SA 4.0",
+  "query": "solar sail",
+  "results": [
+    {
+      "url": "https://tinkerer.example.org/sail-notes.html",
+      "title": "Notes on building a desktop light-sail demo",
+      "description": "Hobbyist writeup with vacuum-chamber measurements.",
+      "quality": 0.82
+    },
+    {
+      "url": "https://oldweb.example.net/~sails/",
+      "title": "The Solar Sail Page (est. 1997)",
+      "description": "A classic personal page tracking sail research.",
+      "quality": 0.71
+    },
+    {
+      "url": "ftp://not-http.example.com/file",
+      "title": "Non-HTTP entry that must be skipped",
+      "description": ""
+    },
+    "a stray non-object entry"
+  ]
+}

@@ -16,7 +16,13 @@ from scout.adapters.base import BaseAdapter
 logger = logging.getLogger("scout")
 
 # Module paths scanned for BaseAdapter subclasses, in presentation order.
-_ADAPTER_MODULES: tuple[str, ...] = ()
+_ADAPTER_MODULES: tuple[str, ...] = (
+    "scout.adapters.mojeek",
+    "scout.adapters.brave",
+    "scout.adapters.duckduckgo",
+    "scout.adapters.startpage",
+    "scout.adapters.marginalia",
+)
 
 _registry: dict[str, type[BaseAdapter]] | None = None
 
