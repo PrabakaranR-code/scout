@@ -1,0 +1,20 @@
+{
+  "header": {"type": "esummary", "version": "0.3"},
+  "result": {
+    "uids": ["38012345", "37654321"],
+    "38012345": {
+      "uid": "38012345",
+      "pubdate": "2026 Mar 14",
+      "source": "J Exp Biol",
+      "fulljournalname": "The Journal of Experimental Biology",
+      "title": "Circadian regulation of photoreceptor turnover in deep-sea fish."
+    },
+    "37654321": {
+      "uid": "37654321",
+      "pubdate": "2025",
+      "source": "PLoS One",
+      "fulljournalname": "PLoS ONE",
+      "title": "A meta-analysis of light-exposure interventions for shift workers."
+    }
+  }
+}

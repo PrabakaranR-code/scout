@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>Fact Check Feed</title>
+  <link>https://factcheck.example/feed</link>
+  <description>Sample fact-checker feed</description>
+  <item>
+    <title>No, the flood footage is not from this week</title>
+    <link>https://factcheck.example/claims/flood-footage</link>
+    <description>Viral flood video actually shows a 2019 event, metadata
+      confirms.</description>
+    <pubDate>Thu, 09 Jul 2026 08:00:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>Claim about vaccine ingredients is false</title>
+    <link>https://factcheck.example/claims/vaccine-ingredients</link>
+    <description>The list circulating online does not match the published
+      formulation.</description>
+    <pubDate>Wed, 08 Jul 2026 12:00:00 GMT</pubDate>
+  </item>
+</channel>
+</rss>

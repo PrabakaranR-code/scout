@@ -1,0 +1,27 @@
+{
+  "articles": [
+    {
+      "url": "https://paper.example/news/flood-barriers-report",
+      "url_mobile": "",
+      "title": "Flood barrier pilots expand to twelve cities",
+      "seendate": "20260708T101500Z",
+      "socialimage": "",
+      "domain": "paper.example",
+      "language": "English",
+      "sourcecountry": "Netherlands"
+    },
+    {
+      "url": "https://tribune.example/story/flood-costs",
+      "title": "Rising flood costs strain municipal budgets",
+      "seendate": "20260707T221100Z",
+      "domain": "tribune.example",
+      "language": "English",
+      "sourcecountry": "India"
+    },
+    {
+      "url": "not-a-url",
+      "title": "Broken entry that must be skipped",
+      "seendate": "bogus"
+    }
+  ]
+}

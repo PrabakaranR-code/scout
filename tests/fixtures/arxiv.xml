@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>ArXiv Query: search_query=all:solar sail</title>
+  <id>http://arxiv.org/api/example</id>
+  <updated>2026-07-01T00:00:00-04:00</updated>
+  <entry>
+    <id>http://arxiv.org/abs/2601.01234v1</id>
+    <updated>2026-01-05T14:00:00Z</updated>
+    <published>2026-01-05T14:00:00Z</published>
+    <title>Attitude control strategies for large solar
+      sails</title>
+    <summary>  We survey momentum-management approaches for gossamer solar
+      sails, comparing vane-based and shifted-mass architectures across three
+      mission classes.  </summary>
+    <author><name>A. Researcher</name></author>
+    <link href="http://arxiv.org/abs/2601.01234v1" rel="alternate" type="text/html"/>
+  </entry>
+  <entry>
+    <id>http://arxiv.org/abs/2602.04321v2</id>
+    <updated>2026-02-11T09:00:00Z</updated>
+    <published>2026-02-10T08:30:00Z</published>
+    <title>Photon pressure navigation without ephemerides</title>
+    <summary>An autonomous navigation scheme for sailcraft in cislunar
+      space.</summary>
+    <author><name>B. Author</name></author>
+    <link href="http://arxiv.org/abs/2602.04321v2" rel="alternate" type="text/html"/>
+  </entry>
+</feed>

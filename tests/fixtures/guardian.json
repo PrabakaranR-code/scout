@@ -1,0 +1,23 @@
+{
+  "response": {
+    "status": "ok",
+    "total": 2,
+    "results": [
+      {
+        "id": "environment/2026/jul/08/flood-barriers",
+        "type": "article",
+        "webTitle": "The new generation of flood barriers, explained",
+        "webUrl": "https://www.theguardian.com/environment/2026/jul/08/flood-barriers",
+        "webPublicationDate": "2026-07-08T06:00:00Z",
+        "fields": {"trailText": "How movable walls and inflatable dams are changing urban flood defence."}
+      },
+      {
+        "id": "world/2026/jul/07/flood-insurance",
+        "type": "article",
+        "webTitle": "Flood insurance costs surge worldwide",
+        "webUrl": "https://www.theguardian.com/world/2026/jul/07/flood-insurance",
+        "webPublicationDate": "2026-07-07T18:30:00Z"
+      }
+    ]
+  }
+}

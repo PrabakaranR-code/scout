@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>World News Feed</title>
+  <link>https://outlet-one.example/news</link>
+  <description>Sample outlet feed</description>
+  <item>
+    <title>Coastal cities test new flood barrier designs</title>
+    <link>https://outlet-one.example/news/flood-barriers?utm_source=rss</link>
+    <description>Engineers deployed prototype flood barrier systems in three
+      coastal cities this week.</description>
+    <pubDate>Wed, 08 Jul 2026 09:15:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>Grain prices steady after record harvest</title>
+    <link>https://outlet-one.example/news/grain-prices</link>
+    <description>Markets held firm as harvest data beat forecasts.</description>
+    <pubDate>Tue, 07 Jul 2026 16:40:00 GMT</pubDate>
+  </item>
+  <item>
+    <title>Flood insurance claims hit decade high</title>
+    <link>https://outlet-one.example/news/flood-insurance</link>
+    <description>Insurers report the costliest quarter for flood damage in ten
+      years.</description>
+    <pubDate>Mon, 06 Jul 2026 11:00:00 GMT</pubDate>
+  </item>
+</channel>
+</rss>
