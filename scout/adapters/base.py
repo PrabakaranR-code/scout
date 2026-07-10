@@ -7,7 +7,10 @@ An adapter does two separable things:
 
 The split exists so parsing is testable from saved fixtures with zero
 network. :meth:`BaseAdapter.search` glues the two together and is what the
-core engine calls.
+core engine calls; it also applies the per-source rate limit. The
+:meth:`BaseAdapter.get` helper adds the honest User-Agent, the robots.txt
+check for scraped engines, and turns blocking status codes into
+:class:`~scout.errors.SourceBlockedError`.
 """
 
 from __future__ import annotations
@@ -21,6 +24,9 @@ from urllib.parse import urlsplit
 import httpx
 
 from scout.config import ScoutConfig
+from scout.errors import SourceBlockedError, SourceError
+from scout.ratelimit import RateLimiter
+from scout.robots import RobotsCache
 from scout.schema import Category, SearchResult
 
 
@@ -33,7 +39,8 @@ class BaseAdapter(ABC):
     * ``category`` — the result category this source contributes to.
     * ``default_enabled`` — whether the source runs without explicit config.
     * ``rate_limit`` — maximum requests per second against this source.
-    * ``timeout`` — per-request timeout in seconds.
+    * ``timeout`` — per-request timeout in seconds; ``None`` inherits the
+      config-wide default.
     * ``requires_env`` — env var that must exist for the source to activate
       (``None`` for keyless sources).
     * ``scrapes_html`` — True for HTML-endpoint engines; these honor
@@ -44,16 +51,27 @@ class BaseAdapter(ABC):
     category: ClassVar[Category] = "general"
     default_enabled: ClassVar[bool] = True
     rate_limit: ClassVar[float] = 1.0
-    timeout: ClassVar[float] = 8.0
+    timeout: ClassVar[float | None] = None
     requires_env: ClassVar[str | None] = None
     scrapes_html: ClassVar[bool] = False
 
-    def __init__(self, config: ScoutConfig) -> None:
+    def __init__(
+        self,
+        config: ScoutConfig,
+        *,
+        limiter: RateLimiter | None = None,
+        robots: RobotsCache | None = None,
+    ) -> None:
         self.config = config
+        self._limiter = limiter or RateLimiter()
+        self._robots = robots or RobotsCache()
         settings = config.source_settings(self.name)
-        self.effective_timeout: float = (
-            settings.timeout if settings.timeout is not None else self.timeout
-        )
+        if settings.timeout is not None:
+            self.effective_timeout: float = settings.timeout
+        elif self.timeout is not None:
+            self.effective_timeout = self.timeout
+        else:
+            self.effective_timeout = config.timeout
         self.effective_rate_limit: float = (
             settings.rate_limit if settings.rate_limit is not None else self.rate_limit
         )
@@ -88,12 +106,43 @@ class BaseAdapter(ABC):
     async def search(
         self, client: httpx.AsyncClient, query: str, limit: int
     ) -> list[SearchResult]:
-        """Fetch then parse; the core engine calls this inside its own
-        timeout and failure isolation."""
+        """Rate-limit, fetch, then parse; the core engine calls this inside
+        its own timeout and failure isolation."""
+        await self._limiter.acquire(self.name, self.effective_rate_limit)
         raw = await self.fetch(client, query, limit)
         return self.parse(raw, query, limit)[:limit]
 
     # -- helpers for subclasses ----------------------------------------------
+
+    async def get(
+        self,
+        client: httpx.AsyncClient,
+        url: str,
+        *,
+        params: dict[str, Any] | None = None,
+    ) -> httpx.Response:
+        """Polite GET: honest User-Agent, robots.txt for scraped engines,
+        blocking statuses surfaced as :class:`SourceBlockedError`."""
+        target = str(httpx.URL(url, params=params)) if params else url
+        if self.scrapes_html and self.config.respect_robots:
+            allowed = await self._robots.allowed(
+                client, target, self.config.resolved_user_agent()
+            )
+            if not allowed:
+                raise SourceBlockedError(f"{self.name}: robots.txt disallows {url}")
+        response = await client.get(
+            target,
+            headers=self.request_headers(),
+            timeout=self.effective_timeout,
+            follow_redirects=True,
+        )
+        if response.status_code in (401, 403, 429):
+            raise SourceBlockedError(
+                f"{self.name}: HTTP {response.status_code} from {url}"
+            )
+        if response.status_code >= 400:
+            raise SourceError(f"{self.name}: HTTP {response.status_code} from {url}")
+        return response
 
     def make_result(
         self,
@@ -120,7 +169,7 @@ class BaseAdapter(ABC):
         )
 
     def _is_trusted(self, url: str) -> bool:
-        host = urlsplit(url).hostname or ""
+        host = (urlsplit(url).hostname or "").lower()
         for outlet in self.config.trusted_outlets:
             outlet = outlet.lower().lstrip(".")
             if host == outlet or host.endswith("." + outlet):
