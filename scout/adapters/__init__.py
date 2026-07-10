@@ -29,6 +29,7 @@ _ADAPTER_MODULES: tuple[str, ...] = (
     "scout.adapters.rss",
     "scout.adapters.gdelt",
     "scout.adapters.guardian",
+    "scout.adapters.searxng_public",
 )
 
 _registry: dict[str, type[BaseAdapter]] | None = None
