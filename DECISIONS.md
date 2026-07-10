@@ -31,3 +31,8 @@ One line per choice made where the spec was silent.
   title+summary (case-insensitive); matches ordered newest first.
 - Timeout precedence: per-source config override > adapter class default >
   config-wide `timeout`.
+- The available GitHub tooling in this environment cannot create releases
+  directly, so a tag-triggered `release.yml` workflow publishes the GitHub
+  release (re-running the test suite first) when `v*` tags are pushed.
+- Acceptance sequence (§9.1–9.5) is codified in `scripts/acceptance.sh` so the
+  three §9.6 stability runs are identical and reproducible.
