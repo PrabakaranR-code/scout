@@ -1,0 +1,49 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "scout-search"
+version = "0.1.0"
+description = "SCOUT: keyless, multi-source web search library and CLI. No servers, no API keys."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+authors = [{ name = "SCOUT contributors" }]
+keywords = ["search", "metasearch", "rss", "wikipedia", "arxiv", "news"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: Indexing/Search",
+]
+dependencies = [
+    "httpx>=0.25",
+    "pydantic>=2.0",
+    "feedparser>=6.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+]
+
+[project.scripts]
+scout = "scout.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/PrabakaranR-code/scout"
+Repository = "https://github.com/PrabakaranR-code/scout"
+
+[tool.setuptools.packages.find]
+include = ["scout*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = [
+    "live: tests that hit the real network (excluded from CI; enable with SCOUT_LIVE_TEST=1)",
+]
