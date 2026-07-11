@@ -1,8 +1,14 @@
 name: Release
 
+# The RELEASE file at the repo root names the version to publish. When a
+# change to it lands on main, this workflow tests the tree, then creates the
+# tag and the GitHub release with CHANGELOG.md as notes (skipping silently if
+# that tag is already released). Tag-push and manual dispatch also work where
+# credentials allow them.
 on:
   push:
-    tags: ["v*"]
+    branches: [main]
+    paths: ["RELEASE"]
   workflow_dispatch:
     inputs:
       tag:
@@ -33,13 +39,15 @@ jobs:
         run: |
           if [ "$GITHUB_EVENT_NAME" = "workflow_dispatch" ]; then
             TAG="$INPUT_TAG"
-            TARGET_ARGS=(--target "$GITHUB_SHA")
           else
-            TAG="$GITHUB_REF_NAME"
-            TARGET_ARGS=()
+            TAG="$(tr -d '[:space:]' < RELEASE)"
+          fi
+          if gh release view "$TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "release $TAG already exists; nothing to do"
+            exit 0
           fi
           gh release create "$TAG" \
             --repo "$GITHUB_REPOSITORY" \
-            "${TARGET_ARGS[@]}" \
+            --target "$GITHUB_SHA" \
             --title "SCOUT $TAG" \
             --notes-file CHANGELOG.md
